@@ -16,19 +16,19 @@ function mkdirs(p, mode, f, made) {
   if (!made)
     made = null;
 
-  var cb = f || function() {};
+  var cb = f || function () {};
   if (typeof mode === 'string')
     mode = parseInt(mode, 8);
   p = path.resolve(p);
 
-  fs.mkdir(p, mode, function(er) {
+  fs.mkdir(p, mode, function (er) {
     if (!er) {
       made = made || p;
       return cb(null, made);
     }
     switch (er.code) {
       case 'ENOENT':
-        mkdirs(path.dirname(p), mode, function(er, made) {
+        mkdirs(path.dirname(p), mode, function (er, made) {
           if (er) {
             cb(er, made);
           } else {
@@ -41,7 +41,7 @@ function mkdirs(p, mode, f, made) {
         // there already.  If so, then hooray!  If not, then something
         // is borked.
       default:
-        fs.stat(p, function(er2, stat) {
+        fs.stat(p, function (er2, stat) {
           // if the stat fails, then that's super weird.
           // let the original error be the failure reason.
           if (er2 || !stat.isDirectory()) {
@@ -57,8 +57,8 @@ function mkdirs(p, mode, f, made) {
 // single file copy
 function copyFile(file, toDir, cb) {
   async.waterfall([
-    function(callback) {
-      fs.exists(toDir, function(exists) {
+    function (callback) {
+      fs.exists(toDir, function (exists) {
         if (exists) {
           callback(null, false);
         } else {
@@ -66,23 +66,23 @@ function copyFile(file, toDir, cb) {
         }
       });
     },
-    function(need, callback) {
+    function (need, callback) {
       if (need) {
         mkdirs(path.dirname(toDir), callback);
       } else {
         callback(null, true);
       }
     },
-    function(p, callback) {
+    function (p, callback) {
       var reads = fs.createReadStream(file);
       var writes = fs.createWriteStream(path.join(path.dirname(toDir), path.basename(file)));
       reads.pipe(writes);
       //don't forget close the  when  all the data are read
-      reads.on("end", function() {
+      reads.on("end", function () {
         writes.end();
         callback(null);
       });
-      reads.on("error", function(err) {
+      reads.on("error", function (err) {
         console.log("error occur in reads");
         callback(true, err);
       });
@@ -96,10 +96,10 @@ function copyFile(file, toDir, cb) {
 
 function _ccoutTask(from, to, cbw) {
   async.waterfall([
-    function(callback) {
+    function (callback) {
       fs.stat(from, callback);
     },
-    function(stats, callback) {
+    function (stats, callback) {
       if (stats.isFile()) {
         cbw.addFile(from, to);
         callback(null, []);
@@ -107,7 +107,7 @@ function _ccoutTask(from, to, cbw) {
         fs.readdir(from, callback);
       }
     },
-    function(files, callback) {
+    function (files, callback) {
       if (files.length) {
         for (var i = 0; i < files.length; i++) {
           _ccoutTask(path.join(from, files[i]), path.join(to, files[i]), cbw.increase());
@@ -130,11 +130,11 @@ function ccoutTask(from, to, cb) {
     }
   }
 
-  wrapper.increase = function() {
+  wrapper.increase = function () {
     count++;
     return wrapper;
   }
-  wrapper.addFile = function(file, dir) {
+  wrapper.addFile = function (file, dir) {
     files.push({
       file: file,
       dir: dir
@@ -147,11 +147,11 @@ function ccoutTask(from, to, cb) {
 
 function copyDir(from, to, cb) {
   if (!cb) {
-    cb = function() {};
+    cb = function () {};
   }
   async.waterfall([
-    function(callback) {
-      fs.exists(from, function(exists) {
+    function (callback) {
+      fs.exists(from, function (exists) {
         if (exists) {
           callback(null, true);
         } else {
@@ -160,13 +160,13 @@ function copyDir(from, to, cb) {
         }
       });
     },
-    function(exists, callback) {
+    function (exists, callback) {
       fs.stat(from, callback);
     },
-    function(stats, callback) {
+    function (stats, callback) {
       if (stats.isFile()) {
         // one file copy
-        copyFile(from, to, function(err) {
+        copyFile(from, to, function (err) {
           if (err) {
             // break the waterfall
             callback(true);
@@ -178,9 +178,9 @@ function copyDir(from, to, cb) {
         ccoutTask(from, to, callback);
       }
     },
-    function(files, callback) {
+    function (files, callback) {
       // prevent reaching to max file open limit
-      async.mapLimit(files, 10, function(f, cb) {
+      async.mapLimit(files, 10, function (f, cb) {
         copyFile(f.file, f.dir, cb);
       }, callback);
     }
@@ -190,9 +190,9 @@ function copyDir(from, to, cb) {
 // 给dist添加依package.json文件
 const file = resolve(`../dist/package.json`)
 const packageJson = `{
-  "name": "vue-ssr-server",
+  "name": "vue-ssr-template",
   "version": "1.0.0",
-  "description": "A Vue.js project wuth vue 2.0, vue-router and vuex for server side rendering.",
+  "description": "A Vue.js project 2.0 for server side rendering.",
   "author": "zwq <obj_ee@163.com>",
   "license": "MIT",
   "scripts": {
@@ -219,7 +219,7 @@ const packageJson = `{
 
 // 把打包后的文件放在dist目录文件夹
 const dirArr = ['output/', 'public/', 'config/', 'processes.json', 'server.js']
-dirArr.forEach(function(item) {
+dirArr.forEach(function (item) {
   let src = resolve(`../${item}`)
   let dst = resolve(`../dist/${item}`)
   copyDir(src, dst, (err) => {
