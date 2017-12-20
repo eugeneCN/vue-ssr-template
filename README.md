@@ -14,8 +14,8 @@
 ## Node 版本
 
 ```bash
-node 6.*
-node 7.*
+node 6.x
+node 7.x
 ```
 
 ## 本地运行
@@ -40,7 +40,7 @@ npm run del
 ```
 
 ## 项目部署
-> 个人建议生产环境不放源代码，so .. 做了一些打包脚本 npm run build 后生成dist文件夹 将dist文件夹放在我们的生产服务器，安装依赖后通过npm run pm2 来启动项目(确保你已经安装了pm2)，了解[pm2](https://github.com/Unitech/pm2)。
+> 个人建议生产环境不放源代码，so .. 做了一些打包脚本 npm run build 后生成dist文件夹，将dist文件夹放在我们的生产服务器，安装依赖后通过npm run pm2 来启动项目(确保你已经安装了pm2)，了解[pm2](https://github.com/Unitech/pm2)。
 
 ``` bash
 npm install or yarn install
