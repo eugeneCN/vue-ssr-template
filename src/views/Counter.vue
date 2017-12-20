@@ -13,6 +13,9 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Counter',
+  title () {
+    return 'Counter'
+  },
   computed: {
     ...mapGetters({
       count: 'getCount'

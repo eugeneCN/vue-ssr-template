@@ -25,6 +25,9 @@ import { mapGetters } from 'vuex'
 import api from 'src/api'
 export default {
   name: 'Themes',
+  title () {
+    return 'Themes'
+  },
   data() {
     return {
       open: false,

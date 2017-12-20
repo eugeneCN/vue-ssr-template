@@ -32,6 +32,9 @@
 <script>
 export default {
   name: 'Widget',
+  title () {
+    return 'Widget'
+  },
   methods: {
     alert() {
       this.$alert({

@@ -22,6 +22,9 @@
 import { toUpperCase, uuid } from 'util/util'
 export default {
   name: 'About',
+  title () {
+    return 'About'
+  },
   data() {
     return {
       input: '',

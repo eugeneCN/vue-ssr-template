@@ -86,6 +86,8 @@ app.get('*', (req, res) => {
 
   const context = {
     title: 'vue-ssr-template',
+    keywords: 'vue-ssr服务端脚手架',
+    description: 'vue-ssr-template, vue-server-renderer',
     version: v,
     url: req.url,
     cookies: req.cookies

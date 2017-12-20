@@ -4,6 +4,9 @@ import store from './store'
 import router from './router'
 import { sync } from 'vuex-router-sync'
 import * as uiv from 'uiv'
+import titleMixin from './util/title'
+
+Vue.mixin(titleMixin)
 
 Vue.use(uiv)
 

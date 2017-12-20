@@ -76,6 +76,9 @@
 <script>
 export default {
   name: 'Home',
+  title () {
+    return 'Home'
+  },
   created() {},
   computed: {},
   asyncData({ store }) {},
