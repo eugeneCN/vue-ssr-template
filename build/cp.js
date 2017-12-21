@@ -201,6 +201,7 @@ const packageJson = `{
   },
   "dependencies": {
     "axios": "^0.13.1",
+    "cookie-parser": "^1.4.3",
     "cross-env": "^3.1.4",
     "express": "^4.14.0",
     "lru-cache": "^4.0.1",
