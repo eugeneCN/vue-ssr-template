@@ -18,7 +18,6 @@ const actions = {
   getThemes ({ state, commit }) {
     return api.get('/themes').then((response) => {
       commit('THEMES_LIST', response.others)
-      console.log('列表', response.others)
     }).catch((error) => {
       console.log(error)
     })

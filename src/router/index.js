@@ -6,6 +6,7 @@ import About from 'views/About.vue'
 import Themes from 'views/Themes.vue'
 import Widget from 'views/Widget.vue'
 import Counter from 'views/Counter.vue'
+import Theme from 'views/Theme.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,9 @@ const router = new VueRouter({
   }, {
     path: '/Counter',
     component: Counter
+  }, {
+    path: '/Theme/:id',
+    component: Theme
   }]
 })
 

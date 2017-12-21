@@ -14,28 +14,17 @@
         <p>{{item.description}}</p>
       </div>
     </div>
-    <modal v-model="open" title="Modal" ref="modal">
-      <h4>JSON</h4>
-      <pre>{{jsons}}</pre>
-    </modal>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import api from 'src/api'
 export default {
-  name: 'Themes',
-  title () {
+  name: 'Theme',
+  title() {
     return {
       title: 'Themes',
       keywords: 'vue-ssr服务端脚手架, themes',
       description: 'vue-ssr-template, vue-server-renderer, themes'
-    }
-  },
-  data() {
-    return {
-      open: false,
-      jsons: {}
     }
   },
   computed: {
@@ -45,14 +34,7 @@ export default {
   },
   methods: {
     themeView(id) {
-      api.get(`/theme/${id}`).then((response) => {
-        if (response) {
-          this.open = !this.open
-          this.jsons = JSON.stringify(response, null, 2)
-        }
-      }).catch((error) => {
-        console.log(error)
-      })
+      this.$router.push({ path: '/theme/' + id, params: { id } })
     }
   },
   asyncData({ store }) {

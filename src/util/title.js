@@ -10,7 +10,6 @@ function getTitle (vm) {
 const serverTitleMixin = {
   created () {
     const title = getTitle(this)
-    console.log(title)
     if (title) {
       this.$ssrContext.title = `${title.title} | vue-ssr-template`
       this.$ssrContext.keywords = title.keywords
