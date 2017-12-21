@@ -14,7 +14,11 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Counter',
   title () {
-    return 'Counter'
+    return {
+      title: 'Counter',
+      keywords: 'vue-ssr服务端脚手架, counter',
+      description: 'vue-ssr-template, vue-server-renderer, counter'
+    }
   },
   computed: {
     ...mapGetters({

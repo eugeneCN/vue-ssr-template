@@ -8,7 +8,7 @@
         <form class="form-inline">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="输入 hello vue" v-model="input" @keyup="toInput">
-            <h4 v-if="cases.length">首字母转大写 - {{this.cases}}</h4>
+            <h4 v-if="cases.length">{{this.cases}}</h4>
           </div>
         </form>
       </div>
@@ -23,7 +23,11 @@ import { toUpperCase, uuid } from 'util/util'
 export default {
   name: 'About',
   title () {
-    return 'About'
+    return {
+      title: 'About',
+      keywords: 'vue-ssr服务端脚手架, about',
+      description: 'vue-ssr-template, vue-server-renderer, about'
+    }
   },
   data() {
     return {

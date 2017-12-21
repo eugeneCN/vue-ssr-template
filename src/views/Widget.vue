@@ -33,7 +33,11 @@
 export default {
   name: 'Widget',
   title () {
-    return 'Widget'
+    return {
+      title: 'Widget',
+      keywords: 'vue-ssr服务端脚手架, widget',
+      description: 'vue-ssr-template, vue-server-renderer, widget'
+    }
   },
   methods: {
     alert() {

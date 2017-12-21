@@ -77,7 +77,11 @@
 export default {
   name: 'Home',
   title () {
-    return 'Home'
+    return {
+      title: 'Home',
+      keywords: 'vue-ssr服务端脚手架, home',
+      description: 'vue-ssr-template, vue-server-renderer, home'
+    }
   },
   created() {},
   computed: {},

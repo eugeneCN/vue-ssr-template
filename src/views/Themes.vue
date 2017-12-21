@@ -26,7 +26,11 @@ import api from 'src/api'
 export default {
   name: 'Themes',
   title () {
-    return 'Themes'
+    return {
+      title: 'Themes',
+      keywords: 'vue-ssr服务端脚手架, themes',
+      description: 'vue-ssr-template, vue-server-renderer, themes'
+    }
   },
   data() {
     return {
