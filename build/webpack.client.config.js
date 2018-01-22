@@ -1,10 +1,11 @@
+const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const vueConfig = require('./vue-loader.config')
 const HTMLPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const SWPrecachePlugin = require('sw-precache-webpack-plugin')
-const path = require('path')
 
 const config = merge(base, {
   resolve: {
@@ -13,6 +14,8 @@ const config = merge(base, {
     }
   },
   plugins: [
+    new ExtractTextPlugin('static/css/[name].[hash:7].css'),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     // strip dev-only code in Vue source
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),

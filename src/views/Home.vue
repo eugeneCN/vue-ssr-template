@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
-    <ol class="breadcrumb">
-      <li class="active">Home</li>
-    </ol>
-    <h3><a href="https://ssr.vuejs.org/en/api.html" target="_black">vue-server-renderer</a></h3>
-    <br>
-    <pre>
+<div class="home">
+  <ol class="breadcrumb">
+    <li class="active">Home</li>
+  </ol>
+  <h3><a href="https://ssr.vuejs.org/en/api.html" target="_black">vue-server-renderer</a></h3>
+  <br>
+  <pre>
 
   const isProd = process.env.NODE_ENV === 'production'
 
@@ -70,13 +70,13 @@
     })
   })
     </pre>
-  </div>
+</div>
 </template>
 
 <script>
 export default {
   name: 'Home',
-  title () {
+  title() {
     return {
       title: 'Home',
       keywords: 'vue-ssr服务端脚手架, home',

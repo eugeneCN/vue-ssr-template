@@ -5,26 +5,15 @@
  */
 import qs from 'qs'
 import axios from 'axios'
+import { parseCookie } from 'util/util'
 
-axios.interceptors.response.use((res) => {
-  if (res.status >= 200 && res.status < 300) {
-    return res
-  }
-  return Promise.reject(res)
-}, (error) => {
-  // 网络异常
-  return Promise.reject({ message: '网络异常，请刷新重试', error })
-})
-
-axios.interceptors.request.use(config => {
-  const cookies = process.Cookies || {}
-  config.headers.Cookie = `JSESSIONID=${cookies.JSESSIONID}`
-  return config
-})
+const SSR = global.__VUE_SSR_CONTEXT__
 
 export function createAPI({ server }) {
+  console.log('-----------------------------')
+  console.log('global ', SSR.cookies)
+  console.log('-----------------------------')
   let api
-
   axios.defaults.timeout = server.timeout
   axios.defaults.baseURL = server.baseurl
   axios.defaults.withCredentials = true
@@ -39,7 +28,8 @@ export function createAPI({ server }) {
             url,
             params,
             headers: {
-              'X-Requested-With': 'XMLHttpRequest'
+              'X-Requested-With': 'XMLHttpRequest',
+              'Cookie': parseCookie(SSR.cookies)
             },
             method: 'get'
           }).then(res => {
@@ -57,7 +47,8 @@ export function createAPI({ server }) {
             method: 'post',
             headers: {
               'X-Requested-With': 'XMLHttpRequest',
-              'Content-Type': 'application/x-www-form-urlencoded'
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Cookie': parseCookie(SSR.cookies)
             }
           }).then(res => {
             resolve(res.data)

@@ -58,6 +58,7 @@ Object.keys(proxyTable).forEach(function(context) {
 
 const v = Date.now()
 
+app.use(require('cookie-parser')())
 app.use('/output', serve('./output', true))
 app.use('/service-worker.js', serve('./output/service-worker.js'))
 app.use(favicon(path.resolve(__dirname, 'public/images/favicon.ico')))

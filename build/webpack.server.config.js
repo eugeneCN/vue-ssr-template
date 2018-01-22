@@ -1,10 +1,10 @@
+const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const VueSSRPlugin = require('vue-ssr-webpack-plugin')
-const path = require('path')
 
-module.exports = merge(base, {
+const config = merge(base, {
   target: 'node',
   entry: './src/server-entry.js',
   output: {
@@ -25,3 +25,11 @@ module.exports = merge(base, {
     new VueSSRPlugin()
   ]
 })
+
+if (process.env.NODE_ENV === 'production') {
+  for (let item of config.module.rules) {
+    if (item.loader === 'vue-loader') item.options = {}
+  }
+}
+
+module.exports = config

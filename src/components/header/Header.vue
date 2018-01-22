@@ -1,8 +1,8 @@
 <template>
-  <header id="header" class="header">
-    <top-header></top-header>
-    <top-menus></top-menus>
-  </header>
+	<header id="header" class="header">
+	  <top-header></top-header>
+	  <top-menus></top-menus>
+	</header>
 </template>
 <script>
 import TopHeader from 'components/header/TopHeader.vue'
@@ -15,7 +15,8 @@ export default {
   }
 }
 </script>
-<style lang="stylus">
-  .header
-    padding: 12px 20px 0;
+<style>
+.header {
+  padding: 12px 20px 0;
+}
 </style>

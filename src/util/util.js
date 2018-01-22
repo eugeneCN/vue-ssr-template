@@ -7,3 +7,11 @@ export function uuid() {
     return (c ^ window.crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   })
 }
+
+export function parseCookie(cookies) {
+  var cookie = ''
+  Object.keys(cookies).forEach(item => {
+    cookie += `${item}=${cookies[item]};`
+  })
+  return cookie
+}
